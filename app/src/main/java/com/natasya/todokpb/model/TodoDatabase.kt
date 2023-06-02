@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.natasya.todokpb.util.DB_NAME
 
 @Database(entities = arrayOf(Todo::class), version = 1)
 abstract class TodoDatabase: RoomDatabase() {
@@ -11,7 +12,7 @@ abstract class TodoDatabase: RoomDatabase() {
     companion object {
         @Volatile private var instance: TodoDatabase ?= null
         private var LOCK = Any()
-        private fun buildDatabase(context: Context) = Room.databaseBuilder(context.applicationContext, TodoDatabase::class.java, "newtododb").build()
+        private fun buildDatabase(context: Context) = Room.databaseBuilder(context.applicationContext, TodoDatabase::class.java, DB_NAME).build()
         operator fun invoke(context: Context) {
             if (instance != null){
                 synchronized(LOCK){
