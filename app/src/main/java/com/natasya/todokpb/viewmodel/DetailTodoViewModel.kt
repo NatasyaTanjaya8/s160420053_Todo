@@ -30,11 +30,17 @@ class DetailTodoViewModel(application: Application):AndroidViewModel(application
         get() = job + Dispatchers.IO
 
     fun fetch(uuid: Int){
-
         launch {
             Log.d("uuidcek", uuid.toString())
             var db = buildDB(getApplication())
             todoLD.postValue(db.todoDao().selectTodo(uuid))
+        }
+    }
+
+    fun update(title: String, notes: String, priority: Int, uuid: Int){
+        launch {
+            var db = buildDB(getApplication())
+            db.todoDao().update(title, notes, priority, uuid)
         }
     }
 }

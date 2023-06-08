@@ -24,7 +24,7 @@ class ListTodoViewModel(application: Application):AndroidViewModel(application),
         loadingLD.value = true
         todoLoadErrorLD.value = false
         launch {
-            var db = Room.databaseBuilder(getApplication(), TodoDatabase::class.java, "newtododb").build()
+            var db = buildDB(getApplication())
             todoLD.postValue(db.todoDao().selectAllTodo())
         }
     }

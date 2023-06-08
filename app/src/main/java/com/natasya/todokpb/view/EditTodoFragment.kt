@@ -6,11 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.natasya.todokpb.R
 import com.natasya.todokpb.viewmodel.DetailTodoViewModel
 
@@ -34,18 +33,33 @@ class EditTodoFragment : Fragment() {
         var txtJudulTodo = view.findViewById<TextView>(R.id.txtJudulTodo)
         txtJudulTodo.text = "Edit Todo"
         btnAdd.text = "Save"
+        btnAdd.setOnClickListener {
+            var txtTitle = view?.findViewById<EditText>(R.id.txtTitle)
+            var txtNotes = view?.findViewById<EditText>(R.id.txtNotes)
+            var radioGroup = view.findViewById<RadioGroup>(R.id.radioGroupPriority)
+            var radioButton = view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
+            viewModel.update(txtTitle.text.toString(), txtNotes.text.toString(), radioButton.tag.toString().toString().toInt(), uuid)
+            Toast.makeText(view.context, "Todo updated", Toast.LENGTH_SHORT).show()
+            Navigation.findNavController(it).popBackStack()
+        }
         observeViewModel()
     }
 
     fun observeViewModel(){
         viewModel.todoLD.observe(viewLifecycleOwner, Observer {
             Log.d("todocek", it.toString())
-           /* var txtTitle = view?.findViewById<EditText>(R.id.txtTitle)
+            var txtTitle = view?.findViewById<EditText>(R.id.txtTitle)
             var txtNotes = view?.findViewById<EditText>(R.id.txtNotes)
             txtTitle?.setText(it.title)
             txtNotes?.setText(it.notes)
-
-            */
+            var high = view?.findViewById<RadioButton>(R.id.radioHigh)
+            var med = view?.findViewById<RadioButton>(R.id.radioMedium)
+            var low = view?.findViewById<RadioButton>(R.id.radioLow)
+            when(it.priority){
+                1 -> low?.isChecked = true
+                2 -> med?.isChecked = true
+                3 -> high?.isChecked = true
+            }
         })
     }
 }
