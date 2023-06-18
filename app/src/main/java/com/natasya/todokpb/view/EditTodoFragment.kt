@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.natasya.todokpb.R
 import com.natasya.todokpb.viewmodel.DetailTodoViewModel
+import com.natasya.todokpb.viewmodel.ListTodoViewModel
 
 class EditTodoFragment : Fragment() {
     private lateinit var viewModel: DetailTodoViewModel
@@ -38,7 +39,7 @@ class EditTodoFragment : Fragment() {
             var txtNotes = view?.findViewById<EditText>(R.id.txtNotes)
             var radioGroup = view.findViewById<RadioGroup>(R.id.radioGroupPriority)
             var radioButton = view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
-            viewModel.update(txtTitle.text.toString(), txtNotes.text.toString(), radioButton.tag.toString().toString().toInt(), uuid)
+            viewModel.update(txtTitle.text.toString(), txtNotes.text.toString(), radioButton.tag.toString().toInt(), uuid)
             Toast.makeText(view.context, "Todo updated", Toast.LENGTH_SHORT).show()
             Navigation.findNavController(it).popBackStack()
         }

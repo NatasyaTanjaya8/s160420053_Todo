@@ -18,4 +18,7 @@ interface TodoDao {
 
     @Query("update todo set title=:title, notes=:notes, priority=:priority where uuid=:id")
     fun update(title: String, notes: String, priority: Int, id: Int)
+
+    @Query("update todo set is_done=1 where uuid=:id")
+    fun updateIsDone(id: Int)
 }
