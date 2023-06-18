@@ -20,7 +20,8 @@ import com.natasya.todokpb.viewmodel.ListTodoViewModel
 
 class TodoListFragment : Fragment() {
     private lateinit var viewModel: ListTodoViewModel
-    private var todoListAdapter = TodoListAdapter(arrayListOf(), { item -> viewModel.clearTask(item) })
+    //private var todoListAdapter = TodoListAdapter(arrayListOf(), { item -> viewModel.clearTask(item) })
+    private var todoListAdapter = TodoListAdapter(arrayListOf(), { item -> viewModel.updateTask(item) })
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,13 +37,6 @@ class TodoListFragment : Fragment() {
         viewModel.refresh()
         var recViewTodo = view.findViewById<RecyclerView>(R.id.recViewTodo)
         recViewTodo.layoutManager = LinearLayoutManager(context)
-        //var uuid =
-        //var txtTitle = view?.findViewById<EditText>(R.id.txtTitle)
-        //var txtNotes = view?.findViewById<EditText>(R.id.txtNotes)
-        //var radioGroup = view.findViewById<RadioGroup>(R.id.radioGroupPriority)
-        //var radioButton = view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
-        //var is_done = 1
-        //viewModel.updateIsDone(txtTitle.text.toString(), txtNotes.text.toString(), radioButton.tag.toString().toInt(), is_done, uuid)
         recViewTodo.adapter = todoListAdapter
         var fabAddTodo = view.findViewById<FloatingActionButton>(R.id.fabAddTodo)
         fabAddTodo.setOnClickListener {

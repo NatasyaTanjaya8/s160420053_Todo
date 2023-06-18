@@ -36,4 +36,12 @@ class ListTodoViewModel(application: Application):AndroidViewModel(application),
             todoLD.postValue(db.todoDao().selectAllTodo())
         }
     }
+    fun updateTask(todo: Todo){
+        launch {
+            //var db = Room.databaseBuilder(getApplication(), TodoDatabase::class.java, "newtododb").build()
+            var db = buildDB(getApplication())
+            db.todoDao().updateIsDone(todo.uuid)
+            todoLD.postValue(db.todoDao().selectAllTodo())
+        }
+    }
 }
