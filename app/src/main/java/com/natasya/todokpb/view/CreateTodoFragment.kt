@@ -32,7 +32,7 @@ class CreateTodoFragment : Fragment() {
             var txtNotes = view.findViewById<EditText>(R.id.txtNotes)
             var radioGroup = view.findViewById<RadioGroup>(R.id.radioGroupPriority)
             var radioButton = view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
-            var todo = Todo(txtTitle.text.toString(), txtNotes.text.toString(), radioButton.tag.toString().toInt())
+            var todo = Todo(txtTitle.text.toString(), txtNotes.text.toString(), radioButton.tag.toString().toInt(), 0)
             viewModel.addTodo(todo)
             Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
             Navigation.findNavController(it).popBackStack()
