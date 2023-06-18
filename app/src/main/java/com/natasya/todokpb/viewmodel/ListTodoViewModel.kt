@@ -36,10 +36,4 @@ class ListTodoViewModel(application: Application):AndroidViewModel(application),
             todoLD.postValue(db.todoDao().selectAllTodo())
         }
     }
-    fun updateIsDone(title: String, notes: String, priority: Int, uuid: Int, is_done: Int){
-        launch {
-            var db = buildDB(getApplication())
-            db.todoDao().updateIsDone(title, notes, priority, is_done, uuid)
-        }
-    }
 }
